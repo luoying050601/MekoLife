@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="ja">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MekoLife</title>
+  <style>
+    html,
+    body,
+    #app {
+      margin: 0;
+      width: 100%;
+      height: 100%;
+      background: #0f172a;
+    }
+  </style>
+  <link rel="stylesheet" href="/src/style.css" />
+</head>
+
+<body>
+  <div id="app">
+    <div id="name-overlay" class="overlay">
+      <form id="name-form" class="card">
+        <h1>MekoLife</h1>
+        <p class="card-sub">2Dスペースに入る</p>
+        <label for="player-name">名前</label>
+        <input id="player-name" name="playerName" maxlength="12" autocomplete="off" required />
+        <button type="submit">はじめる</button>
+        <p id="name-error" class="error" aria-live="polite"></p>
+      </form>
+    </div>
+    <div id="game-layout" class="hidden">
+      <header id="top-bar">
+        <div class="top-left">
+          <span id="top-room-label">ルーム: 廊下</span>
+          <span id="top-status">●</span>
+          <span id="top-count">1人オンライン</span>
+        </div>
+        <div class="top-right">
+          <span id="top-user-label"></span>
+        </div>
+      </header>
+      <div id="content-row">
+        <aside id="global-panel">
+          <p class="panel-title">オンライン</p>
+          <ul id="global-list"></ul>
+        </aside>
+        <main id="main-content">
+          <div id="game-root"></div>
+          <!-- Room area indicators (4 corners, with corridor in center) -->
+          <div id="room-labels">
+            <div id="room-label-1" class="room-label room-1">ルーム1</div>
+            <div id="room-label-2" class="room-label room-2">ルーム2</div>
+            <div id="room-label-3" class="room-label room-3">ルーム3</div>
+            <div id="room-label-4" class="room-label room-4">ルーム4</div>
+          </div>
+        </main>
+        <aside id="room-panel" class="hidden">
+          <p class="panel-title">ルームメンバー</p>
+          <ul id="room-list"></ul>
+        </aside>
+        <aside id="chat-panel" class="chat-panel hidden">
+          <div class="chat-panel-header">
+            <span class="chat-panel-title">チャット</span>
+            <button id="chat-close-btn" type="button" class="chat-header-btn" aria-label="チャットを閉じる">✕</button>
+          </div>
+          <div id="chat-messages" class="chat-messages"></div>
+          <form id="chat-form" class="chat-form">
+            <input id="chat-input" type="text" maxlength="200" placeholder="メッセージを入力... (@名前でDM)" aria-label="チャットメッセージ"
+              autocomplete="off" />
+            <button type="submit">送信</button>
+          </form>
+        </aside>
+      </div>
+      <footer id="bottom-bar">
+        <button id="voice-mute" type="button" aria-label="マイクをオン" title="マイクをオン"></button>
+        <span class="bottom-bar-divider" aria-hidden="true"></span>
+        <button id="chat-toggle-btn" type="button" class="chat-toggle-btn">💬 チャット</button>
+        <span class="bottom-bar-divider" aria-hidden="true"></span>
+        <button id="share-start" type="button" disabled>画面共有</button>
+        <button id="share-stop" type="button" disabled>共有停止</button>
+        <span id="share-status" class="share-status" aria-live="polite">共有なし</span>
+      </footer>
+    </div>
+    <div id="debug-console" class="debug-console is-collapsed" aria-label="デバッグコンソール">
+      <button type="button" id="debug-toggle" class="debug-console-title" aria-expanded="false">
+        <span>デバッグ</span>
+        <span id="debug-toggle-hint" class="debug-toggle-hint">開く</span>
+      </button>
+      <div class="debug-console-body">
+        <div class="debug-room-panel" aria-live="polite">
+          <p id="debug-room-current" class="debug-room-current">現在: —</p>
+          <pre id="debug-room-log" class="debug-room-log"></pre>
+        </div>
+        <pre id="debug-log" class="debug-log"></pre>
+        <form id="debug-form" class="debug-form">
+          <input id="debug-input" type="text" maxlength="120" placeholder="コマンド（/dinfo でヘルプ）"
+            autocomplete="off" aria-label="デバッグコマンド" />
+          <button type="submit">実行</button>
+        </form>
+      </div>
+    </div>
+
+  </div>
+  <script type="module" src="/src/main.ts"></script>
+</body>
+
+</html>

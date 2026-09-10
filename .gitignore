@@ -1,0 +1,23 @@
+# Dependencies and build output
+node_modules/
+dist/
+coverage/
+*.tsbuildinfo
+
+# Local secrets (keep the template)
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+
+# Local deployment state
+.vercel/
+.wrangler/
+
+# OS, editor and logs
+.DS_Store
+.idea/
+.vscode/
+*.log
+.understand-anything/
