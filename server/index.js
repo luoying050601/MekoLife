@@ -6,13 +6,28 @@ import fs from "fs";
 import path from "path";
 import { fileURLToPath } from "url";
 import { Server } from "socket.io";
-import { AccessToken } from "livekit-server-sdk";
+import { AccessToken, RoomConfiguration, TrackSource } from "livekit-server-sdk";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const distDir = path.join(__dirname, "..", "dist");
 const hasDist = fs.existsSync(path.join(distDir, "index.html"));
 
 const PORT = Number(process.env.PORT || 3000);
+const LIVEKIT_MAX_PARTICIPANTS = Math.max(
+  1,
+  Number.parseInt(process.env.LIVEKIT_MAX_PARTICIPANTS || "5", 10) || 5
+);
+const LIVEKIT_TOKEN_TTL = process.env.LIVEKIT_TOKEN_TTL?.trim() || "6h";
+const LIVEKIT_ALLOWED_ROOM_IDS = new Set([
+  "room1",
+  "room2",
+  "room3",
+  "room4",
+  "screenshare_room1",
+  "screenshare_room2",
+  "screenshare_room3",
+  "screenshare_room4"
+]);
 const allowedSocketOrigins = new Set(
   (process.env.CORS_ORIGINS || "")
     .split(",")
@@ -64,6 +79,9 @@ app.post("/api/livekit-token", async (req, res) => {
 
   const body = req.body && typeof req.body === "object" ? req.body : {};
   const roomId = sanitizeLiveKitSegment(body.roomId, 48);
+  if (!LIVEKIT_ALLOWED_ROOM_IDS.has(roomId)) {
+    return res.status(400).json({ error: "invalid_livekit_room" });
+  }
   const identity = sanitizeLiveKitSegment(body.identity, 120);
   const displayName = String(body.displayName ?? "")
     .trim()
@@ -75,13 +93,19 @@ app.post("/api/livekit-token", async (req, res) => {
     const token = new AccessToken(apiKey, apiSecret, {
       identity,
       name: displayName,
-      ttl: "6h"
+      ttl: LIVEKIT_TOKEN_TTL
     });
     token.addGrant({
       roomJoin: true,
       room: livekitRoom,
-      canPublish: true,
+      canPublishSources: roomId.startsWith("screenshare_")
+        ? [TrackSource.SCREEN_SHARE, TrackSource.SCREEN_SHARE_AUDIO]
+        : [TrackSource.MICROPHONE],
       canSubscribe: true
+    });
+    token.roomConfig = new RoomConfiguration({
+      name: livekitRoom,
+      maxParticipants: LIVEKIT_MAX_PARTICIPANTS
     });
     const jwt = await token.toJwt();
     res.json({ token: jwt, url: livekitUrl, room: livekitRoom });

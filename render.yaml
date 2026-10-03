@@ -12,3 +12,7 @@ services:
         value: production
       - key: CORS_ORIGINS
         sync: false
+      - key: LIVEKIT_MAX_PARTICIPANTS
+        value: "5"
+      - key: LIVEKIT_TOKEN_TTL
+        value: 6h

@@ -29,6 +29,8 @@ NODE_ENV=production npm start
 
 ## 部署到 Vercel 和 Render
 
+详细步骤、线上地址和排错方式见 [部署与线上配置笔记](docs/deployment-guide.md)。
+
 仓库已包含 Vercel 与 Render 配置。Render 会在部署时安装构建依赖、构建前端并由后端同源托管，因此直接打开 Render 服务根地址（例如 `https://ymetalife-server.onrender.com/`）就是完整游戏页面；`/health` 只用于检查服务状态。若修改了 `render.yaml`，请在 Render Blueprint 页面执行 Manual sync 并等待部署成功。
 
 也可将同一 GitHub 仓库导入 Vercel，Framework Preset 选择 Vite，并添加环境变量 `VITE_SOCKET_URL`，值为 Render 服务地址（不要在末尾加 `/`）。重新部署 Vercel 后，也可通过 Vercel 分配的 `*.vercel.app` 地址访问前端。自定义前端域名需要在 Render 的 `CORS_ORIGINS` 中添加完整来源，例如 `https://game.example.com`，多个来源用逗号分隔。
