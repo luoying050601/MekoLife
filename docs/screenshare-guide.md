@@ -1,6 +1,6 @@
 # 画面共有ガイド
 
-MekoLife における **画面共有（LiveKit only）** のポリシーと検証手順です。WebRTC P2P / FrameRelay のコードは残していますが、実行パスでは使いません。
+YmetaLife における **画面共有（LiveKit only）** のポリシーと検証手順です。WebRTC P2P / FrameRelay のコードは残していますが、実行パスでは使いません。
 
 ---
 

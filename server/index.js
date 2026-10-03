@@ -30,7 +30,7 @@ if (!hasDist) {
   /** Dev-only: root has no game UI when Vite runs on :5173. */
   app.get("/", (_req, res) => {
     res.type("html").send(`<!DOCTYPE html><meta charset="utf-8">
-<title>MekoLife server</title>
+<title>YmetaLife server</title>
 <body style="font-family:system-ui;max-width:40rem;margin:2rem;line-height:1.5">
 <h1>マルチプレイ用サーバー稼働中</h1>
 <p>このポートは <strong>Socket.IO / API</strong> 専用です。ゲーム UI は別のポート（Vite）です。</p>
@@ -611,7 +611,7 @@ if (hasDist) {
 
 httpServer.listen(PORT, "0.0.0.0", () => {
   console.log(`\n╔════════════════════════════════════════╗`);
-  console.log(`║  MekoLife Server Started             ║`);
+  console.log(`║  YmetaLife Server Started            ║`);
   console.log(`╚════════════════════════════════════════╝`);
   console.log(`Listening: 0.0.0.0:${PORT}`);
   console.log(`Static UI: ${hasDist ? "dist/ (production)" : "none — use Vite :5173"}`);

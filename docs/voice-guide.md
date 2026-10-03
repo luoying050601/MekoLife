@@ -1,6 +1,6 @@
 # 音声ガイド
 
-MekoLife の音声は **LiveKit SFU のみ** です。WebRTC mesh のコードはリポジトリに残していますが、実行パスでは使いません。
+YmetaLife の音声は **LiveKit SFU のみ** です。WebRTC mesh のコードはリポジトリに残していますが、実行パスでは使いません。
 
 ---
 

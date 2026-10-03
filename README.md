@@ -1,4 +1,4 @@
-# MekoLife
+# YmetaLife
 
 个人自用的 2D 多人在线空间，基于 Phaser 3、Socket.IO 和 LiveKit。
 支持角色移动、文字聊天、房间语音及屏幕共享。
@@ -29,7 +29,7 @@ NODE_ENV=production npm start
 
 ## 部署到 Vercel 和 Render
 
-仓库已包含 Vercel 与 Render 配置。先将 GitHub 仓库导入 Render，并通过根目录中的 `render.yaml` 创建 Web Service。部署成功后，记录 Render 服务地址，例如 `https://mekolife-server.onrender.com`。
+仓库已包含 Vercel 与 Render 配置。先将 GitHub 仓库导入 Render，并通过根目录中的 `render.yaml` 创建 Web Service。部署成功后，记录 Render 服务地址，例如 `https://ymetalife-server.onrender.com`。
 
 然后将同一 GitHub 仓库导入 Vercel，Framework Preset 选择 Vite，并添加环境变量 `VITE_SOCKET_URL`，值为上一步的 Render 服务地址（不要在末尾加 `/`）。重新部署 Vercel 后，可通过 Vercel 分配的 `*.vercel.app` 地址公开访问。自定义前端域名需要在 Render 的 `CORS_ORIGINS` 中添加完整来源，例如 `https://game.example.com`，多个来源用逗号分隔。
 

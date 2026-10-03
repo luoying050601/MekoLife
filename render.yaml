@@ -1,6 +1,6 @@
 services:
   - type: web
-    name: mekolife-server
+    name: ymetalife-server
     runtime: node
     plan: free
     region: singapore

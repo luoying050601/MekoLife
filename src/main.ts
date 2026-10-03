@@ -33,7 +33,7 @@ bindDebugConsoleToggle();
 
 // Log startup info with version and mode
 console.log(
-  `%c🎮 MekoLife Client Loaded`,
+  `%c🎮 YmetaLife Client Loaded`,
   `color: #0ea5e9; font-weight: bold; font-size: 14px;`
 );
 console.log(`Mode: ${import.meta.env.MODE}`);
@@ -41,7 +41,7 @@ console.log(`URL: ${new URL(import.meta.env.BASE_URL, window.location.origin).hr
 
 // Log startup info with version and mode
 console.log(
-  `%c🎮 MekoLife Client Loaded`,
+  `%c🎮 YmetaLife Client Loaded`,
   `color: #0ea5e9; font-weight: bold; font-size: 14px;`
 );
 console.log(`Mode: ${import.meta.env.MODE}`);
