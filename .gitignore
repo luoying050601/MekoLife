@@ -21,3 +21,5 @@ coverage/
 .vscode/
 *.log
 .understand-anything/
+.vercel
+.env*

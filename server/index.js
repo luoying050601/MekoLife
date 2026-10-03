@@ -269,9 +269,9 @@ io.on("connection", (socket) => {
     const hasClientPos = Number.isFinite(Number(x)) && Number.isFinite(Number(y));
     const spawn = hasClientPos
       ? {
-          x: clampPosition(Number(x), 24, WORLD_WIDTH - 24),
-          y: clampPosition(Number(y), 24, WORLD_HEIGHT - 24)
-        }
+        x: clampPosition(Number(x), 24, WORLD_WIDTH - 24),
+        y: clampPosition(Number(y), 24, WORLD_HEIGHT - 24)
+      }
       : (previousPlayer ?? computeSpawnPosition(room.size));
     room.set(socket.id, {
       id: socket.id,
