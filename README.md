@@ -27,6 +27,16 @@ NODE_ENV=production npm start
 
 生产模式由后端提供 `dist/` 静态文件。也可使用仓库中的 Dockerfile 构建。
 
+## 部署到 Vercel 和 Render
+
+仓库已包含 Vercel 与 Render 配置。先将 GitHub 仓库导入 Render，并通过根目录中的 `render.yaml` 创建 Web Service。部署成功后，记录 Render 服务地址，例如 `https://mekolife-server.onrender.com`。
+
+然后将同一 GitHub 仓库导入 Vercel，Framework Preset 选择 Vite，并添加环境变量 `VITE_SOCKET_URL`，值为上一步的 Render 服务地址（不要在末尾加 `/`）。重新部署 Vercel 后，可通过 Vercel 分配的 `*.vercel.app` 地址公开访问。自定义前端域名需要在 Render 的 `CORS_ORIGINS` 中添加完整来源，例如 `https://game.example.com`，多个来源用逗号分隔。
+
+Render 免费实例空闲时会休眠，首次访问可能需要等待唤醒。多人移动和文字聊天无需额外密钥；语音与屏幕共享需在 Render 环境变量中设置 `LIVEKIT_URL`、`LIVEKIT_API_KEY` 和 `LIVEKIT_API_SECRET`。
+
+注意：公开部署前请先确认 [来源与许可记录](PROVENANCE.md) 中提到的原项目代码及素材授权。该记录说明相关授权尚未确认。
+
 ## 提交到个人仓库
 
 提交源代码、`package-lock.json`、配置模板及文档。

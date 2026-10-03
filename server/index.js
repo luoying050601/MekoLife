@@ -13,6 +13,12 @@ const distDir = path.join(__dirname, "..", "dist");
 const hasDist = fs.existsSync(path.join(distDir, "index.html"));
 
 const PORT = Number(process.env.PORT || 3000);
+const allowedSocketOrigins = new Set(
+  (process.env.CORS_ORIGINS || "")
+    .split(",")
+    .map((origin) => origin.trim().replace(/\/$/, ""))
+    .filter(Boolean)
+);
 const WORLD_WIDTH = 1280;
 const WORLD_HEIGHT = 720;
 
@@ -88,9 +94,11 @@ app.post("/api/livekit-token", async (req, res) => {
 const httpServer = http.createServer(app);
 function allowSocketCors(origin, callback) {
   if (!origin) return callback(null, true);
+  if (allowedSocketOrigins.has(origin.replace(/\/$/, ""))) return callback(null, origin);
   if (origin === "http://localhost:5173" || /^http:\/\/127\.0\.0\.1:\d+$/.test(origin))
     return callback(null, origin);
   if (/\.trycloudflare\.com$/i.test(origin)) return callback(null, origin);
+  if (/\.vercel\.app$/i.test(origin)) return callback(null, origin);
   if (/\.onrender\.com$/i.test(origin)) return callback(null, origin);
   if (/\.fly\.dev$/i.test(origin)) return callback(null, origin);
   if (hasDist) return callback(null, origin);
