@@ -29,9 +29,9 @@ NODE_ENV=production npm start
 
 ## 部署到 Vercel 和 Render
 
-仓库已包含 Vercel 与 Render 配置。先将 GitHub 仓库导入 Render，并通过根目录中的 `render.yaml` 创建 Web Service。部署成功后，记录 Render 服务地址，例如 `https://ymetalife-server.onrender.com`。
+仓库已包含 Vercel 与 Render 配置。Render 会在部署时构建前端并由后端同源托管，因此直接打开 Render 服务根地址（例如 `https://ymetalife-server.onrender.com/`）就是完整游戏页面；`/health` 只用于检查服务状态。若修改了 `render.yaml`，请在 Render Blueprint 页面执行 Manual sync 并等待部署成功。
 
-然后将同一 GitHub 仓库导入 Vercel，Framework Preset 选择 Vite，并添加环境变量 `VITE_SOCKET_URL`，值为上一步的 Render 服务地址（不要在末尾加 `/`）。重新部署 Vercel 后，可通过 Vercel 分配的 `*.vercel.app` 地址公开访问。自定义前端域名需要在 Render 的 `CORS_ORIGINS` 中添加完整来源，例如 `https://game.example.com`，多个来源用逗号分隔。
+也可将同一 GitHub 仓库导入 Vercel，Framework Preset 选择 Vite，并添加环境变量 `VITE_SOCKET_URL`，值为 Render 服务地址（不要在末尾加 `/`）。重新部署 Vercel 后，也可通过 Vercel 分配的 `*.vercel.app` 地址访问前端。自定义前端域名需要在 Render 的 `CORS_ORIGINS` 中添加完整来源，例如 `https://game.example.com`，多个来源用逗号分隔。
 
 Render 免费实例空闲时会休眠，首次访问可能需要等待唤醒。多人移动和文字聊天无需额外密钥；语音与屏幕共享需在 Render 环境变量中设置 `LIVEKIT_URL`、`LIVEKIT_API_KEY` 和 `LIVEKIT_API_SECRET`。
 
