@@ -70,6 +70,8 @@ Render 根地址已能提供完整游戏。只有需要单独使用 Vercel 前�
 - `LIVEKIT_MAX_PARTICIPANTS`：每个 LiveKit 房间的最大连接数；当前设为 `5`。
 - `LIVEKIT_TOKEN_TTL`：访问 token 有效期；当前设为 `6h`。
 
+凭据位置：在 LiveKit Cloud 打开 `YMetaLife` 项目 → **Settings → API keys → Create key**。`LIVEKIT_URL` 从项目连接信息中复制；API Key 和 API Secret 成对使用。若旧 key 的 Secret 已无法查看，创建新 key 并将新的一对值更新到 Render；确认新部署正常后，再撤销不再使用的旧 key。
+
 保存后等待 Render 重启/部署，再到游戏的 `room1` 至 `room4` 测试。走廊 `corridor` 不会加入 LiveKit 房间。麦克风默认静音，需要用户点击麦克风按钮并授权浏览器访问麦克风；屏幕共享也需要浏览器授权。
 
 不要把 `LIVEKIT_API_SECRET` 发到聊天、提交到 GitHub，或填写在 Vercel。只在 Render 的私密环境变量设置中填写。
