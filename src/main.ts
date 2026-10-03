@@ -351,7 +351,9 @@ form.addEventListener("submit", (event) => {
 
   chatPanel.classList.remove("hidden");
   chatMessages.innerHTML = "";
-  game = createGame(playerName);
+  requestAnimationFrame(() => {
+    game = createGame(playerName);
+  });
 });
 
 function createGame(playerName: string): Phaser.Game {
